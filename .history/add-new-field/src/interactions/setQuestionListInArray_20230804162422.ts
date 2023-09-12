@@ -6,7 +6,6 @@ function setQuestionListInArray (): boolean{
     console.log('Data: ', dataContainer);
         const answers = dataContainer.querySelectorAll('div[role="none"]'),
               tempArray = Array.from(answers);
-        console.log(tempArray);
         
         for (let i = 0; i < tempArray.length; i++) {
             const questionName = tempArray[i].querySelector("label:not(span)"),
@@ -25,8 +24,9 @@ function setQuestionListInArray (): boolean{
                   multipleChoiceArray = Array.from(multipleChoiceAnswer),
                   answer = singleChoiceAnswer?.textContent != undefined ? singleChoiceAnswer?.textContent : 
                   (multipleChoiceArray.length > 0 ? multipleChoiceArray.map(item => item.innerHTML).join(', ').toString() : 
-                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value :
-                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : "")));
+                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : 
+                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value : "")));
+            console.log(multipleChoiceArray.map(item => item.innerHTML));
                   
             let obj = {
                         "Vraag": questionName?.textContent?.replace(/[*]/g, ""),

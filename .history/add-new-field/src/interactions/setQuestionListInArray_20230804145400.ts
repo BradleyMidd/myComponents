@@ -6,7 +6,6 @@ function setQuestionListInArray (): boolean{
     console.log('Data: ', dataContainer);
         const answers = dataContainer.querySelectorAll('div[role="none"]'),
               tempArray = Array.from(answers);
-        console.log(tempArray);
         
         for (let i = 0; i < tempArray.length; i++) {
             const questionName = tempArray[i].querySelector("label:not(span)"),
@@ -16,17 +15,15 @@ function setQuestionListInArray (): boolean{
                   yesOrNoAnswer = tempArray[i].querySelector("input[class='jss23']") as HTMLInputElement,
                   dependantNumber = tempArray[i].querySelector('div[data-component="depend_num"]'),
                   dependantText = tempArray[i].querySelector('div[data-component="depend_text"]'),
-                  dependantQuestionNum = dependantNumber?.querySelector('fieldset>legend>span'),
-                  dependantQuestionText = dependantText?.querySelector('fieldset>legend>span'),
-                  dependantQuestion = dependantQuestionNum?.textContent != undefined ? dependantQuestionNum?.textContent?.replace(/[*]/g, "") : dependantQuestionText?.textContent != undefined ? dependantQuestionText?.textContent?.replace(/[*]/g, "") : "",
+                  dependantQuestion = dependantNumber?.querySelector('fieldset>legend>span'),
                   dependantQuestionAnswerNum = dependantNumber?.querySelector("input") as HTMLInputElement,
                   dependantQuestionAnswerText = dependantText?.textContent,
-                  dependantAnswer = dependantQuestionAnswerNum?.value != undefined ? dependantQuestionAnswerNum?.value : dependantQuestionAnswerText != undefined ? dependantQuestionAnswerText : "",
+                  dependantAnswer = dependantQuestionAnswerNum != undefined ? dependantQuestionAnswerNum : dependantQuestionAnswerText != undefined ? dependantQuestionAnswerText : "",
                   multipleChoiceArray = Array.from(multipleChoiceAnswer),
                   answer = singleChoiceAnswer?.textContent != undefined ? singleChoiceAnswer?.textContent : 
-                  (multipleChoiceArray.length > 0 ? multipleChoiceArray.map(item => item.innerHTML).join(', ').toString() : 
-                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value :
-                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : "")));
+                  (multipleChoiceArray.length > 0 ? multipleChoiceArray.map(item => item.innerHTML) : 
+                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : 
+                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value : "")));
                   
             let obj = {
                         "Vraag": questionName?.textContent?.replace(/[*]/g, ""),
@@ -34,7 +31,7 @@ function setQuestionListInArray (): boolean{
                         }
             let dependObj = 
                 {
-                    "Vraag": dependantQuestion,
+                    "Vraag": dependantQuestion?.textContent?.replace(/[*]/g, ""),
                     "Antwoord": dependantAnswer
                 }
             if(obj.Vraag != undefined){
