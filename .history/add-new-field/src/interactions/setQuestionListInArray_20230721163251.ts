@@ -21,7 +21,7 @@ function setQuestionListInArray (): boolean{
                   answer = singleChoiceAnswer?.textContent != undefined ? singleChoiceAnswer?.textContent : 
                   (multipleChoiceArray.length > 0 ? multipleChoiceArray.toString() : 
                   (openAnswer?.textContent != undefined ? openAnswer?.textContent : 
-                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value : ""))); 
+                    (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value : ""))); 
                   
             let obj = {
                         "Vraag": questionName?.textContent?.replace(/[*]/g, ""),

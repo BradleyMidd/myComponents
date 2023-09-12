@@ -92,13 +92,10 @@
           json.value = jsonText;
         }
       },
-      firstField = () => {
-      const fieldInput = document.getElementById('test1'),
-      firstFieldChange = fieldInput.addEventListener('change', (e) => {
+      firstField = document.getElementById('test1'),
+      firstFieldChange = firstField.addEventListener('change', (e) => {
         addObjectToArray(e.target);
       })
-    }
-        
 
     
     return <div className="container" id="container" style={{display: 'none'}}><button id='add' onClick={buttonClick1}>Add field</button>
@@ -107,10 +104,9 @@
     <br id="br1"/>
       <div id='input-container1' className='input-container1'>
         <label id='label1'>Optie 1: </label>
-        <input type="text" id="test1" name="field1" onChange={firstField}/>
+        <input type="text" id="test1" name="field1"/>
       </div>
     </div>;
-
   })(),
   styles: () => () => ({
     root: {

@@ -9,28 +9,18 @@ function setQuestionListInArray (): boolean{
         
         for (let i = 0; i < tempArray.length; i++) {
             const questionName = tempArray[i].querySelector("label:not(span)"),
-                  singleChoiceAnswer = tempArray[i].querySelector("div[class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']"),
-                  multipleChoiceAnswer = tempArray[i].querySelectorAll('div[class="MuiChip-root MuiAutocomplete-tag MuiChip-deletable"]>span'),
-                  openAnswer = tempArray[i].querySelector('textarea'),
-                  yesOrNoAnswer = tempArray[i].querySelector("input[class='jss23']") as HTMLInputElement,
+                  answer = tempArray[i].querySelector("div[class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input']"),
                   dependantNumber = tempArray[i].querySelector('div[data-component="depend_num"]'),
-                  dependantText = tempArray[i].querySelector('div[data-component="depend_text"]'),
                   dependantQuestion = dependantNumber?.querySelector('fieldset>legend>span'),
-                  dependantQuestionAnswer = dependantNumber?.querySelector("input") as HTMLInputElement,
-                  multipleChoiceArray = Array.from(multipleChoiceAnswer),
-                  answer = singleChoiceAnswer?.textContent != undefined ? singleChoiceAnswer?.textContent : 
-                  (multipleChoiceArray.length > 0 ? multipleChoiceArray.toString() : 
-                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : 
-                  (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value : ""))); 
-                  
+                  dependantQuestionAnswer = dependantNumber?.querySelector("div[class='MuiOutlinedInput-input']");
             let obj = {
                         "Vraag": questionName?.textContent?.replace(/[*]/g, ""),
-                        "Antwoord": answer
+                        "Antwoord": answer?.textContent
                         }
             let dependObj = 
                 {
                     "Vraag": dependantQuestion?.textContent?.replace(/[*]/g, ""),
-                    "Antwoord": dependantQuestionAnswer?.value
+                    "Antwoord": dependantQuestionAnswer?.textContent
                 }
             if(obj.Vraag != undefined){
                 answerArray.push(obj); 
