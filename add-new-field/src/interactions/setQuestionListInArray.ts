@@ -1,4 +1,5 @@
 function setQuestionListInArray (): boolean{
+    // Get the data-container of the questions and make a empty array.
     const container: HTMLCollection | null = document.getElementsByClassName("MuiCardContent-root") as HTMLCollection,
           dataContainer = container[0],
           questionnaire:  HTMLInputElement | null = document.getElementById('questionnaire') as HTMLInputElement,
@@ -26,7 +27,8 @@ function setQuestionListInArray (): boolean{
                   answer = singleChoiceAnswer?.textContent != undefined ? singleChoiceAnswer?.textContent : 
                   (multipleChoiceArray.length > 0 ? multipleChoiceArray.map(item => item.innerHTML).join(', ').toString() : 
                   (yesOrNoAnswer?.value != undefined ? yesOrNoAnswer?.value :
-                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : "")));
+                  (openAnswer?.textContent != undefined ? openAnswer?.textContent : ""))),
+                  isNumber = dependantQuestionAnswerNum?.value != undefined ? true : false;
                   
             let obj = {
                         "Vraag": questionName?.textContent?.replace(/[*]/g, ""),
@@ -35,7 +37,8 @@ function setQuestionListInArray (): boolean{
             let dependObj = 
                 {
                     "Vraag": dependantQuestion,
-                    "Antwoord": dependantAnswer
+                    "Antwoord": dependantAnswer,
+                    "isNummer": isNumber
                 }
             if(obj.Vraag != undefined){
                 answerArray.push(obj); 
